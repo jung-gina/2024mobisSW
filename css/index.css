@@ -1,0 +1,76 @@
+#txt_loading,
+#intro {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #012d74;
+  text-align: center;
+  align-items: center;
+}
+
+#intro {
+  display: none;
+}
+
+#main {
+  display: none;
+}
+
+p {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: white;
+  position: relative;
+}
+
+.btn {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #012d74;
+  background-color: white;
+  width: 25vh;
+}
+
+#btn_agree,
+#btn_disAgree {
+  display: none;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #012d74;
+}
+
+/* 그라데이션 효과 애니메이션 */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 그라데이션 효과 */
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #012d74, transparent);
+  background-size: 200% 100%;
+  animation: gradientAnimation 2s linear infinite;
+  border-radius: 3px;
+}
