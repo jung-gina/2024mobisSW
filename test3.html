@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Car Position Test</title>
+</head>
+<body>
+
+<h2>Update Car Position Test</h2>
+
+<button onclick="startSending()">Start Sending</button>
+<button onclick="stopSending()">Stop Sending</button>
+
+<div id="response"></div>
+
+<script>
+let intervalId;
+
+function startSending() {
+  intervalId = setInterval(sendPosition, 500); // 0.5초 간격으로 실행
+}
+
+function stopSending() {
+  clearInterval(intervalId);
+}
+
+function sendPosition() {
+  // 임의의 위치 데이터 생성
+  const latitude = getRandomFloat(-90, 90);
+  const longitude = getRandomFloat(-180, 180);
+
+  // API에 POST 요청 보내기
+  fetch("http://47.186.58.92:8080/updateCarPosionHandler", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userID: "your_user_id",
+      latitude: latitude,
+      longitude: longitude
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    document.getElementById("response").innerText = JSON.stringify(data);
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    document.getElementById("response").innerText = "An error occurred. Please try again.";
+  });
+}
+
+// 주어진 범위 내에서 임의의 실수 생성하는 함수
+function getRandomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+</script>
+
+</body>
+</html>

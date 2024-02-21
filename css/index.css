@@ -1,39 +1,215 @@
-#txt_loading,
-#intro {
+#txt_loading {
   margin: 0;
   padding: 0;
   height: 100vh;
   width: 100vw;
   background-color: #012d74;
   text-align: center;
-  align-items: center;
 }
 
+#intro {
+  margin-left: 10vh;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  text-align: left;
+}
+
+#time_bar {
+  height: 1.5em;
+  background-color: white;
+}
+
+#time_bar p {
+  margin: 0;
+  padding: 0;
+  width: parent;
+  height: parent;
+  font-size: 1.2em;
+  text-align: center;
+  color: black;
+}
+
+#big {
+  color: black;
+  font-size: 5em;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#big img {
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 0.7em;
+  height: 0.7em;
+}
+
+.background-image-div {
+  width: 500px;
+  height: 300px;
+  background-image: url("../img/backgoutnd.png");
+  background-size: cover; /* 배경 이미지를 div에 맞게 조절합니다. */
+  background-position: center; /* 배경 이미지를 가운데 정렬합니다. */
+}
+
+.small {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1em;
+  font-weight: 400;
+  color: gray;
+}
+
+#map_cover {
+  width: 100vw;
+  height: 0.1vh;
+}
+
+#map {
+  opacity: 0.4;
+}
+
+#mode {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#middle {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+#bottom {
+  padding-top: 1vh;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+#left,
+#right {
+  width: 30vw;
+  height: 70vh;
+  border: solid 2px red;
+}
+
+#bottom_left,
+#bottom_right {
+  font-size: 24px;
+  font-weight: bold;
+  width: 30vw;
+  height: 5vh;
+  border: green 2px solid;
+}
+
+#bottom_center {
+  font-size: 24px;
+  font-weight: bold;
+  width: 20vw;
+  height: 5vh;
+  border: brown 2px solid;
+}
+
+#img_battery {
+  width: 45px;
+  height: 30px;
+}
+
+#giar_D {
+  color: red;
+}
+
+#giar_P,
+#giar_R,
+#giar_N {
+  color: gray;
+}
+#center {
+  border: 2px yellow solid;
+  width: 20vw;
+  height: 70vh;
+}
+
+#time_bar span {
+  margin-left: 50px;
+  margin-right: 50px;
+}
 #intro {
   display: none;
 }
 
 #main {
   display: none;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
 }
 
-p {
+#txt_loading p {
   font-size: 2.5em;
   font-weight: bold;
   color: white;
   position: relative;
 }
 
-.btn {
-  font-size: 1.8em;
+#intro p {
+  font-size: 2.5em;
   font-weight: bold;
   color: #012d74;
-  background-color: white;
-  width: 20vh;
+  position: relative;
+}
+
+.btn {
+  font-size: 2.2em;
+  color: white;
+  font-weight: 400;
+  background-color: #012d74;
+  width: 6em;
+  height: 1.7em;
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+  transition: box-shadow 0.3s ease; /* 그림자 변화 효과 설정 */
+}
+
+.box {
+  display: inline-block; /* 요소들이 가로로 나란히 배치되도록 설정 */
+}
+
+.btn:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버시 그림자 설정 */
+}
+#my_car {
+  width: 20vw;
+  height: 25vh;
+  text-align: center;
+}
+
+#car {
+  width: 20vw;
+  height: 49vh;
+}
+
+#car_left,
+#car_right {
+  width: 3vw;
+  height: 20vh;
+  border: solid 3px red;
+}
+#my_car img {
+  width: 14vw;
+  height: 22vh;
 }
 
 #btn_agree,
-#btn_disAgree {
+#btn_disAgree,
+#btn_login {
+  display: none;
+}
+
+#login {
   display: none;
 }
 
@@ -49,6 +225,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: #012d74;
+  overflow: hidden;
+}
+
+.container {
+  white-space: nowrap; /* 요소들이 줄바꿈되지 않도록 설정 */
 }
 
 /* 그라데이션 효과 애니메이션 */

@@ -1,26 +1,55 @@
-<script
-  src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
-  integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8"
-  crossorigin="anonymous"
-></script>
-<script>
-  Kakao.init("c089c8172def97eb00c07217cae17495"); // 사용하려는 앱의 JavaScript 키 입력
-</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원 가입 테스트 페이지</title>
+  </head>
+  <body>
+    <h1>회원 가입 테스트 페이지</h1>
+    <form id="signup_form" action="http://5.36.111.164:40765/" method="POST">
+      <label for="email">이메일:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+      <label for="password">비밀번호:</label><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      /><br /><br />
+      <input type="submit" value="가입하기" />
+    </form>
 
-<a id="start-navigation" href="javascript:startNavigation()">
-  <img
-    src="https://developers.kakao.com/assets/img/about/buttons/navi/kakaonavi_btn_medium.png"
-    alt="길 안내하기 버튼"
-  />
-</a>
+    <div id="response_message"></div>
 
-<script>
-  function startNavigation() {
-    Kakao.Navi.start({
-      name: "현대백화점 판교점",
-      x: 127.11205203011632,
-      y: 37.39279717586919,
-      coordType: "wgs84",
-    });
-  }
-</script>
+    <script>
+      document
+        .getElementById("signup_form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // 폼 제출 동작 중지
+
+          // 폼 데이터 가져오기
+          var formData = new FormData(this);
+
+          // POST 요청 보내기
+          fetch(this.action, {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json()) // JSON 형태로 응답 데이터 파싱
+            .then((data) => {
+              // 응답 데이터 처리
+              document.getElementById("response_message").innerHTML = `
+      <p>ID: ${data.id}</p>
+      <p>메시지: ${data.message}</p>
+    `;
+            })
+            .catch((error) => {
+              console.error("에러 발생:", error);
+              document.getElementById("response_message").textContent =
+                "서버와의 통신 중 오류가 발생했습니다.";
+            });
+        });
+    </script>
+  </body>
+</html>

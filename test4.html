@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nearby Pedestrians Test</title>
+</head>
+<body>
+
+<h2>Nearby Pedestrians Test</h2>
+
+<div id="response"></div>
+
+<script>
+let intervalId;
+
+function startRequesting() {
+  intervalId = setInterval(requestPedestrianLocations, 500); // 0.5초 간격으로 실행
+}
+
+function stopRequesting() {
+  clearInterval(intervalId);
+}
+
+function requestPedestrianLocations() {
+  // 사용자 ID와 함께 API에 GET 요청 보내기
+  const userId = "your_user_id";
+  fetch(`http://47.186.58.92:8080/nearPedfindHandler?id=${userId}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    document.getElementById("response").innerText = JSON.stringify(data);
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    document.getElementById("response").innerText = "An error occurred. Please try again.";
+  });
+}
+</script>
+
+<button onclick="startRequesting()">Start Requesting</button>
+<button onclick="stopRequesting()">Stop Requesting</button>
+
+</body>
+</html>

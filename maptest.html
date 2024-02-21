@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map test</title>
+    <style>
+      #map {
+        opacity: 0.5; /* 50% 불투명도 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="section" id="section-3">
+        <h1>오시는 길</h1>
+        <div id="map" style="width: 70%; height: 300px; margin: auto"></div>
+        <code id="snippet" class="snippet"></code>
+      </section>
+    </div>
+
+    <!-- 각자 발급받은 Client ID 값 넣기 -->
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlykk6t5o1"
+    ></script>
+    <script id="code">
+      var mapDiv = document.getElementById("map");
+      var map = new naver.maps.Map(mapDiv);
+    </script>
+  </body>
+</html>
