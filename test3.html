@@ -1,63 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Update Car Position Test</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Car Position</title>
+  </head>
+  <body>
+    <h2>Update Car Position</h2>
 
-<h2>Update Car Position Test</h2>
+    <form id="positionForm">
+      <label for="userID">User ID:</label><br />
+      <input type="text" id="userID" name="userID" required /><br />
+      <label for="latitude">Latitude:</label><br />
+      <input type="text" id="latitude" name="latitude" required /><br />
+      <label for="longitude">Longitude:</label><br />
+      <input type="text" id="longitude" name="longitude" required /><br /><br />
+      <button type="button" onclick="sendRequest()">Send Request</button>
+    </form>
 
-<button onclick="startSending()">Start Sending</button>
-<button onclick="stopSending()">Stop Sending</button>
+    <div id="response"></div>
 
-<div id="response"></div>
+    <script>
+      function sendRequest() {
+        const userID = document.getElementById("userID").value;
+        const latitude = document.getElementById("latitude").value;
+        const longitude = document.getElementById("longitude").value;
 
-<script>
-let intervalId;
+        const data = {
+          userID: userID,
+          latitude: latitude,
+          longitude: longitude,
+        };
 
-function startSending() {
-  intervalId = setInterval(sendPosition, 500); // 0.5초 간격으로 실행
-}
+        // GET 요청으로 변경
+        const queryParams = new URLSearchParams(data).toString();
+        fetch(
+          `http://47.186.58.92:52779/updateCarPositionHandler?${queryParams}`,
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+            document.getElementById("response").innerText = data;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("response").innerText =
+              "An error occurred. Please try again.";
+          });
+      }
 
-function stopSending() {
-  clearInterval(intervalId);
-}
+      function sendRequest() {
+  // 5초 마다
+  const userID = uuid;
+  // const latitude = newCoordinates[index].y;
+  // const longitude = newCoordinates[index].X;
+  // const data = {
+  //   userID: userID,
+  //   latitude: latitude,
+  //   longitude: longitude,
+  // };
+  const data = {
+    userID: userID,
+    latitude: 0,
+    longitude: 0,
+  };
 
-function sendPosition() {
-  // 임의의 위치 데이터 생성
-  const latitude = getRandomFloat(-90, 90);
-  const longitude = getRandomFloat(-180, 180);
+  // GET 요청으로 변경
+  const queryParams = new URLSearchParams(data).toString();
 
-  // API에 POST 요청 보내기
-  fetch("http://47.186.58.92:8080/updateCarPosionHandler", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      userID: "your_user_id",
-      latitude: latitude,
-      longitude: longitude
+  fetch(`http://47.186.58.92:52804/tasks/2`, {
+    method: "GET",
+  }).then((res) => {
+    data.latitude = res.data.lat;
+    data.longitude = res.data.lng;
+    fetch(`http://47.186.58.92:52779/updateCarPositionHandler?${queryParams}`, {
+      method: "GET",
     })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    document.getElementById("response").innerText = JSON.stringify(data);
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    document.getElementById("response").innerText = "An error occurred. Please try again.";
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        document.getElementById("response").innerText = data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.getElementById("response").innerText =
+          "An error occurred. Please try again.";
+      });
   });
 }
 
-// 주어진 범위 내에서 임의의 실수 생성하는 함수
-function getRandomFloat(min, max) {
-  return Math.random() * (max - min) + min;
-}
-</script>
-
-</body>
+    </script>
+  </body>
 </html>

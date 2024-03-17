@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Map test</title>
-    <style>
-      #map {
-        opacity: 0.5; /* 50% 불투명도 */
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <div class="container">
@@ -25,8 +21,26 @@
       src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlykk6t5o1"
     ></script>
     <script id="code">
-      var mapDiv = document.getElementById("map");
-      var map = new naver.maps.Map(mapDiv);
+      var HOME_PATH = window.HOME_PATH || ".";
+      var position = new naver.maps.LatLng(37.5105302, 127.0264395);
+
+      var map = new naver.maps.Map("map", {
+        center: position,
+        zoom: 22,
+      });
+
+      var markerOptions = {
+        position: position.destinationPoint(0, 0),
+        map: map,
+        icon: {
+          url: HOME_PATH + "./img/icon_car.png",
+          size: new naver.maps.Size(30, 51),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(0, 0),
+        },
+      };
+
+      var marker = new naver.maps.Marker(markerOptions);
     </script>
   </body>
 </html>

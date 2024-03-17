@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>회원 가입 테스트 페이지</h1>
-    <form id="signup_form" action="http://5.36.111.164:40765/" method="POST">
+    <form id="signup_form" method="GET">
       <label for="email">이메일:</label><br />
       <input type="email" id="email" name="email" required /><br /><br />
       <label for="password">비밀번호:</label><br />
@@ -31,18 +31,20 @@
           // 폼 데이터 가져오기
           var formData = new FormData(this);
 
-          // POST 요청 보내기
-          fetch(this.action, {
-            method: "POST",
-            body: formData,
-          })
+          // 폼 데이터를 쿼리 문자열로 변환
+          var queryString = new URLSearchParams(formData).toString();
+
+          console.log(queryString);
+
+          // GET 요청 보내기
+          fetch("http://47.186.58.92:52779/carSignupHandler?" + queryString)
             .then((response) => response.json()) // JSON 형태로 응답 데이터 파싱
             .then((data) => {
               // 응답 데이터 처리
               document.getElementById("response_message").innerHTML = `
-      <p>ID: ${data.id}</p>
-      <p>메시지: ${data.message}</p>
-    `;
+            <p>ID: ${data.id}</p>
+            <p>메시지: ${data.message}</p>
+          `;
             })
             .catch((error) => {
               console.error("에러 발생:", error);

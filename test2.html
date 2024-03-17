@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Test</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Test</title>
+  </head>
+  <body>
+    <h2>Login Test</h2>
 
-<h2>Login Test</h2>
+    <form id="loginForm">
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+      <label for="password">Password:</label><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      /><br /><br />
+      <button type="button" onclick="login()">Login</button>
+    </form>
 
-<form id="loginForm">
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" required><br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password" required><br><br>
-  <button type="submit">Login</button>
-</form>
+    <div id="response"></div>
 
-<div id="response"></div>
+    <script>
+      function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+        const url = new URL("http://47.186.58.92:52779/carLoginHandler");
+        url.searchParams.append("email", email);
+        url.searchParams.append("password", password);
 
-  const formData = new FormData(this);
-
-  fetch("http://47.186.58.92:8080/carLoginHandler", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    // 서버로부터 받은 응답을 처리
-    console.log(data);
-    document.getElementById("response").innerText = JSON.stringify(data);
-  })
-  .catch(error => {
-    // 오류 처리
-    console.error("Error:", error);
-    document.getElementById("response").innerText = "An error occurred. Please try again.";
-  });
-});
-</script>
-
-</body>
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            // 서버로부터 받은 응답을 처리
+            console.log(data);
+            document.getElementById("response").innerText =
+              JSON.stringify(data);
+          })
+          .catch((error) => {
+            // 오류 처리
+            console.error("Error:", error);
+            document.getElementById("response").innerText =
+              "An error occurred. Please try again.";
+          });
+      }
+    </script>
+  </body>
 </html>

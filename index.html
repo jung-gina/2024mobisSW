@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2024MobisSW</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlykk6t5o1"
+    ></script>
     <script src="./js/index.js"></script>
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
     <div id="root">
-      <!--<div id="time_bar">
-        <p>
-          <span>배터리 이미지</span></span><span>423km</span><span>5°C</span>
-          <span id="time"></span>
-        </p>
-      </div> -->
-
       <div id="txt_loading">
         <div >
           <p></p>
@@ -24,9 +21,23 @@
           <p class="loading">Loading...</p>
         </div>
       </div>
-
-      <div id="login">
-        <form id="signup_form" action="http://5.36.111.164:40765/" method="POST">
+      <div id="server">    
+      <p class="line">로그인</p>
+      <form id="loginForm">
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+      <label for="password">Password:</label><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      /><br /><br />
+      <button type="button" onclick="login()">Login</button>
+      </form>
+      <p class = "line">----------------------------------</p>
+      <p class="line">회원가입</p>
+      <form id="signup_form">
       <label for="email">이메일:</label><br />
       <input type="email" id="email" name="email" required /><br /><br />
       <label for="password">비밀번호:</label><br />
@@ -36,20 +47,21 @@
         name="password"
         required
       /><br /><br />
-      <input type="submit" value="가입하기" />
-    </form>
+      <button type="button" onclick="signup()">SignUp</button>
+      </form>
+      <p class = "line">----------------------------------</p>
 
-    <div id="response_message"></div>
-      </div>
+    <div id="response"></div>
+    </div>  
+
+
 
       <div id="intro">
-        <div >
-          <p></p>
+  <div >
           <p id="typing-text"></p>
           <div id="btn_box">
-            <button class="btn" id="btn_agree">확인</button>
+            <button class="btn" id="btn_agree">시작</button>
             <button class="btn" id="btn_login">로그인</button>
-            <button class="btn" id="btn_disAgree">동의안함</button>
           </div>
         </div>
       </div>
@@ -59,32 +71,17 @@
           <p></p>
           <p class="small" id="mode"><span>sport</span></p>
           <p id="big">
-            <img src="./img/icon_30.png" /><span id = "speed">80</span
+            <img id = "alert" src="./img/icon_30.png" /><span id = "speed">80</span
             ><img src="./img/icon_children.png" />
           </p>
           <p class="small"><span>km/h</span></p>
           <p></p>
         </div> 
 
+
         <div id = "map_cover">
-          <div id="map" style="width: 100vw; height: 70vh; margin: auto"></div>
+          <div id="map"></div>
           <code id="snippet" class="snippet"></code>
-        </div>
-        <div id="middle" class="container ">
-          
-
-          <div id = "left" class="box"></div>
-
-          <div id="center" class="box">
-            <div id="car"></div>
-            <!--<div id="car_left"></div>--->
-            <div id="my_car">
-              <img src="./img/icon_car.png" />
-            </div>
-            <!--<div id="car_right"></div>--->
-          </div>
-            
-          <div id = "right" class="box"> </div>
         </div>
 
         <div id = "bottom">
@@ -105,63 +102,10 @@
 
         </div>
 
-      </div>
-
-      
-
-    </div>
-
-    <script
-      type="text/javascript"
-      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xlykk6t5o1"
-    ></script>
-
-     <script id="code">
-      var map = new naver.maps.Map('map', {
-      center: new naver.maps.LatLng(37.5105302, 127.0264395), // 초기 지도의 중심 좌표
-      zoom: 21, // 초기 지도의 확대 수준
-      transparent: true // 투명도를 적용할 수 있도록 설정
-    });
-
-    // 마커를 생성합니다.
-var marker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(37.5105302, 127.0264395), // 마커의 위치
-    map: map // 마커가 표시될 지도 객체
-});
-    </script>
+      </div> 
 
 
-
-    <script>
-      document
-        .getElementById("signup_form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // 폼 제출 동작 중지
-
-          // 폼 데이터 가져오기
-          var formData = new FormData(this);
-
-          // POST 요청 보내기
-          fetch(this.action, {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json()) // JSON 형태로 응답 데이터 파싱
-            .then((data) => {
-              // 응답 데이터 처리
-              document.getElementById("response_message").innerHTML = `
-      <p>ID: ${data.id}</p>
-      <p>메시지: ${data.message}</p>
-    `;
-            })
-            .catch((error) => {
-              console.error("에러 발생:", error);
-              document.getElementById("response_message").textContent =
-                "서버와의 통신 중 오류가 발생했습니다.";
-            });
-        });
-    </script>
-
+  </div>
     
   </body>
 </html>

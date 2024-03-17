@@ -33,7 +33,7 @@
 
 #big {
   color: black;
-  font-size: 5em;
+  font-size: 3.5em;
   font-weight: bold;
   margin-bottom: 0;
   margin-top: 0;
@@ -63,12 +63,18 @@
 }
 
 #map_cover {
+  position: relative;
   width: 100vw;
-  height: 0.1vh;
+  height: 70vh;
+  overflow: hidden;
+  text-align: center;
 }
 
 #map {
-  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.5s ease-in-out;
 }
 
 #mode {
@@ -76,11 +82,6 @@
   font-weight: bold;
 }
 
-#middle {
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-}
 #bottom {
   padding-top: 1vh;
   text-align: center;
@@ -88,12 +89,7 @@
   justify-content: space-around;
 }
 
-#left,
-#right {
-  width: 30vw;
-  height: 70vh;
-  border: solid 2px red;
-}
+
 
 #bottom_left,
 #bottom_right {
@@ -101,7 +97,6 @@
   font-weight: bold;
   width: 30vw;
   height: 5vh;
-  border: green 2px solid;
 }
 
 #bottom_center {
@@ -109,7 +104,6 @@
   font-weight: bold;
   width: 20vw;
   height: 5vh;
-  border: brown 2px solid;
 }
 
 #img_battery {
@@ -126,11 +120,6 @@
 #giar_N {
   color: gray;
 }
-#center {
-  border: 2px yellow solid;
-  width: 20vw;
-  height: 70vh;
-}
 
 #time_bar span {
   margin-left: 50px;
@@ -142,7 +131,7 @@
 
 #main {
   display: none;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.5);
   width: 100vw;
   height: 100vh;
   text-align: center;
@@ -181,26 +170,14 @@
 .btn:hover {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버시 그림자 설정 */
 }
-#my_car {
-  width: 20vw;
-  height: 25vh;
-  text-align: center;
-}
 
-#car {
-  width: 20vw;
-  height: 49vh;
-}
 
-#car_left,
-#car_right {
-  width: 3vw;
-  height: 20vh;
-  border: solid 3px red;
-}
-#my_car img {
-  width: 14vw;
-  height: 22vh;
+
+.image-container {
+  z-index: 999;
+  position: absolute; /* 절대 위치 지정 */
+  top: 60%; /* 위에서 100px 위치 */
+  left: 50%; /* 왼쪽에서 200px 위치 */
 }
 
 #btn_agree,
@@ -209,7 +186,12 @@
   display: none;
 }
 
-#login {
+#loginForm,
+#signup_form {
+  display: none;
+}
+
+.line {
   display: none;
 }
 
@@ -218,6 +200,7 @@
   padding: 0;
   height: 100vh;
   width: 100vw;
+  text-align: center;
 }
 
 html,

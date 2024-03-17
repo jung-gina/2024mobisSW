@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>지도 회전 예시</title>
+    <style>
+      .map-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .map {
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .rotate-button {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="map-container">
+      <img
+        id="map"
+        class="map"
+        src="https://placekitten.com/400/400"
+        alt="지도"
+      />
+      <button class="rotate-button" onclick="rotateMap()">지도 회전하기</button>
+    </div>
+
+    <script>
+      let rotation = 0;
+
+      function rotateMap() {
+        rotation += 90;
+        document.getElementById(
+          "map"
+        ).style.transform = `translate(-50%, -50%) rotate(${rotation}}deg)`;
+      }
+    </script>
+  </body>
+</html>
